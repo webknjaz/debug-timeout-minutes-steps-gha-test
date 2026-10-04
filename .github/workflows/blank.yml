@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+    - name: Compute step timeouts
+      id: timer-values
+      run: |-
+        echo val1=1 >> "${GITHUB_OUTPUT}"
+        echo val2=2 >> "${GITHUB_OUTPUT}"
+    - name: SHOULD stop after a minute
+      if: always()
+      run: sleep 5
+      timeout-minutes: ${{ steps.timer-values.outputs.val1 }}
+    - name: SHOULD stop after two minutes
+      if: always()
+      run: sleep 5
+      timeout-minutes: ${{ steps.timer-values.outputs.val2 }}
+    - name: complete
+      if: always()
+      run: echo end
