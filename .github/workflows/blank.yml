@@ -19,11 +19,11 @@ jobs:
     - name: SHOULD stop after a minute
       if: always()
       run: sleep 5
-      timeout-minutes: ${{ steps.timer-values.outputs.val1 }}
+      timeout-minutes: ${{ fromJSON(steps.timer-values.outputs.val1) }}
     - name: SHOULD stop after two minutes
       if: always()
       run: sleep 5
-      timeout-minutes: ${{ steps.timer-values.outputs.val2 }}
+      timeout-minutes: ${{ fromJSON(steps.timer-values.outputs.val2) }}
     - name: complete
       if: always()
       run: echo end
