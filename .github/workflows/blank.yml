@@ -18,11 +18,11 @@ jobs:
         echo val2=2 >> "${GITHUB_OUTPUT}"
     - name: SHOULD stop after a minute
       if: always()
-      run: sleep 5
+      run: sleep 300
       timeout-minutes: ${{ fromJSON(steps.timer-values.outputs.val1) }}
     - name: SHOULD stop after two minutes
       if: always()
-      run: sleep 5
+      run: sleep 300
       timeout-minutes: ${{ fromJSON(steps.timer-values.outputs.val2) }}
     - name: complete
       if: always()
